@@ -1,0 +1,111 @@
+🚀 CI/CD Pipeline Deployment using Jenkins, Docker & AWS EC2
+📌 Project Overview
+This project demonstrates the design and implementation of a complete CI/CD (Continuous Integration and Continuous Deployment) pipeline for deploying a Node.js application using Jenkins, Docker, and AWS EC2. The goal of this project was to automate the entire software delivery process, starting from code integration to application deployment, reducing manual effort and ensuring consistency across deployments.
+
+The application source code is hosted on GitHub, and Jenkins is configured to automatically fetch the latest code, build a Docker image, and deploy the application on an EC2 instance. This project simulates a real-world DevOps workflow and provides hands-on experience in automation, containerization, and cloud-based deployment.
+
+🛠️ Technologies Used
+Node.js – Backend application
+
+Docker – Containerization
+
+Jenkins – CI/CD automation
+
+AWS EC2 – Cloud deployment
+
+GitHub – Source code management
+
+⚙️ What I Implemented
+Created a Node.js application and containerized it using Docker
+
+Wrote a Dockerfile to define the application environment
+
+Configured Jenkins pipeline (Jenkinsfile) for automation
+
+Integrated GitHub repository with Jenkins for code fetching
+
+Set up AWS EC2 instance for deployment
+
+Configured SSH-based secure communication between Jenkins and EC2
+
+Automated container lifecycle management (stop, remove, rebuild, redeploy)
+
+🔄 CI/CD Workflow (How It Works)
+Code is pushed to the GitHub repository
+
+Jenkins pipeline is triggered (manually or automatically)
+
+Jenkins clones the latest source code
+
+Docker image is built using the Dockerfile
+
+Existing containers running on EC2 are stopped and removed
+
+Old Docker images are cleaned up to avoid conflicts
+
+A new container is created and deployed on EC2
+
+Application is exposed on port 3000 and made accessible via browser
+
+🚀 Deployment Process
+The deployment is fully automated using Jenkins pipeline:
+
+Build Docker image:
+
+docker build -t devops-app .
+Stop running containers:
+
+docker stop $(docker ps -q) || true
+Remove old containers:
+
+docker rm $(docker ps -aq) || true
+Remove old Docker image:
+
+docker rmi devops-app || true
+Run new container:
+
+docker run -d -p 3000:3000 --name devops-container devops-app
+🌐 Application Access
+The application is deployed on AWS EC2 and can be accessed using:
+
+http://<EC2-PUBLIC-IP>:3000
+⚡ Challenges Faced & Solutions
+During the implementation, several real-world DevOps issues were encountered and resolved:
+
+Port already in use (3000)
+→ Identified running containers and killed processes using the port
+
+Docker container conflicts
+→ Implemented cleanup steps to remove old containers and images
+
+SSH authentication issues
+→ Configured proper credentials in Jenkins using ssh-agent
+
+Pipeline failures due to misconfiguration
+→ Debugged Jenkinsfile and corrected pipeline structure
+
+Deployment inconsistencies
+→ Ensured clean deployment by removing previous resources before redeploying
+
+📚 Learning Outcomes
+Through this project, I gained practical experience in:
+
+Building CI/CD pipelines using Jenkins
+
+Docker containerization and image management
+
+Deploying applications on AWS EC2
+
+Handling real-time deployment and infrastructure issues
+
+Automating end-to-end application delivery
+
+🎯 Key Highlights
+End-to-end automated deployment pipeline
+
+Zero manual intervention after pipeline trigger
+
+Real-world DevOps problem-solving experience
+
+Scalable and reusable deployment setup
+
